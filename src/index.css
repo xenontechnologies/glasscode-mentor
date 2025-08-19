@@ -2,95 +2,121 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* CodeMentor AI Glassmorphic Design System - All colors MUST be HSL */
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Background System */
+    --background: 248 250% 97%;
+    --background-glass: 0 0% 100%;
+    --background-blur: 255 255% 100% / 0.1;
+    --foreground: 210 11% 15%;
 
+    /* Glass Card System */
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-glass: 0 0% 100% / 0.7;
+    --card-border: 0 0% 100% / 0.2;
+    --card-foreground: 210 11% 15%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    /* Primary Emerald System */
+    --primary: 158 64% 52%;
+    --primary-light: 160 84% 39%;  
+    --primary-glow: 160 100% 85%;
+    --primary-foreground: 0 0% 100%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    /* Secondary Glass System */
+    --secondary: 210 20% 96%;
+    --secondary-glass: 210 20% 96% / 0.6;
+    --secondary-foreground: 210 11% 15%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    /* Muted Glass */
+    --muted: 210 12% 92%;
+    --muted-glass: 210 12% 92% / 0.4;
+    --muted-foreground: 210 6% 45%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    /* Accent Glass */
+    --accent: 158 64% 52%;
+    --accent-light: 160 100% 95%;
+    --accent-foreground: 0 0% 100%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    /* Destructive */
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    /* Borders & Inputs */
+    --border: 210 20% 88%;
+    --border-glass: 0 0% 100% / 0.3;
+    --input: 0 0% 100% / 0.8;
+    --input-border: 210 20% 88%;
+    --ring: 158 64% 52%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(158 64% 52%) 0%, hsl(160 84% 39%) 100%);
+    --gradient-glass: linear-gradient(135deg, hsl(0 0% 100% / 0.1) 0%, hsl(0 0% 100% / 0.05) 100%);
+    --gradient-hero: linear-gradient(135deg, hsl(248 250% 97%) 0%, hsl(160 100% 95%) 100%);
 
-    --radius: 0.5rem;
+    /* Shadows */
+    --shadow-glass: 0 8px 32px 0 hsl(31 100% 0% / 0.1);
+    --shadow-card: 0 4px 20px 0 hsl(158 64% 52% / 0.1);
+    --shadow-glow: 0 0 40px hsl(158 64% 52% / 0.2);
 
-    --sidebar-background: 0 0% 98%;
+    /* Border Radius */
+    --radius: 1rem;
+    --radius-sm: 0.75rem;
+    --radius-lg: 1.5rem;
 
-    --sidebar-foreground: 240 5.3% 26.1%;
-
-    --sidebar-primary: 240 5.9% 10%;
-
-    --sidebar-primary-foreground: 0 0% 98%;
-
-    --sidebar-accent: 240 4.8% 95.9%;
-
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
-    --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    /* Animation */
+    --transition-glass: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
+    /* Dark Background System */
+    --background: 222 47% 11%;
+    --background-glass: 222 47% 11%;
+    --background-blur: 222 47% 11% / 0.8;
     --foreground: 210 40% 98%;
 
-    --card: 222.2 84% 4.9%;
+    /* Dark Glass Cards */
+    --card: 222 47% 11%;
+    --card-glass: 222 47% 11% / 0.8;
+    --card-border: 0 0% 100% / 0.1;
     --card-foreground: 210 40% 98%;
 
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
+    /* Dark Primary */
+    --primary: 158 64% 52%;
+    --primary-light: 160 84% 39%;
+    --primary-glow: 160 100% 30%;
+    --primary-foreground: 210 40% 98%;
 
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-
-    --secondary: 217.2 32.6% 17.5%;
+    /* Dark Secondary */
+    --secondary: 217 32% 17%;
+    --secondary-glass: 217 32% 17% / 0.6;
     --secondary-foreground: 210 40% 98%;
 
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
+    /* Dark Muted */
+    --muted: 215 28% 17%;
+    --muted-glass: 215 28% 17% / 0.4;
+    --muted-foreground: 215 20% 65%;
 
-    --accent: 217.2 32.6% 17.5%;
+    /* Dark Accent */
+    --accent: 158 64% 52%;
+    --accent-light: 160 100% 15%;
     --accent-foreground: 210 40% 98%;
 
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
+    /* Dark Borders */
+    --border: 217 32% 17%;
+    --border-glass: 0 0% 100% / 0.1;
+    --input: 217 32% 17% / 0.8;
+    --input-border: 217 32% 17%;
 
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    /* Dark Gradients */
+    --gradient-hero: linear-gradient(135deg, hsl(222 47% 11%) 0%, hsl(160 100% 15%) 100%);
+    --gradient-glass: linear-gradient(135deg, hsl(0 0% 100% / 0.05) 0%, hsl(0 0% 100% / 0.02) 100%);
+
+    /* Dark Shadows */
+    --shadow-glass: 0 8px 32px 0 hsl(0 0% 0% / 0.4);
+    --shadow-card: 0 4px 20px 0 hsl(158 64% 52% / 0.2);
+    --shadow-glow: 0 0 40px hsl(158 64% 52% / 0.3);
   }
 }
 
@@ -100,6 +126,89 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-['Inter'] antialiased;
+    background: var(--gradient-hero);
+    min-height: 100vh;
   }
+
+  /* Glassmorphic base classes */
+  .glass {
+    background: hsl(var(--card-glass));
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid hsl(var(--border-glass));
+    box-shadow: var(--shadow-glass);
+  }
+
+  .glass-card {
+    @apply glass rounded-2xl;
+  }
+
+  .glass-subtle {
+    background: hsl(var(--muted-glass));
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid hsl(var(--border-glass));
+  }
+}
+
+@layer components {
+  /* Glassmorphic Button Variants */
+  .btn-glass {
+    @apply glass px-6 py-3 rounded-xl font-medium transition-all duration-300;
+  }
+
+  .btn-glass:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-glow);
+  }
+
+  .btn-hero {
+    background: var(--gradient-primary);
+    @apply text-white font-semibold px-8 py-4 rounded-2xl shadow-lg;
+    box-shadow: var(--shadow-card);
+    transition: var(--transition-glass);
+  }
+
+  .btn-hero:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-glow);
+  }
+
+  /* Glass Input Styling */
+  .input-glass {
+    @apply glass px-4 py-3 rounded-xl border-0;
+    background: hsl(var(--input));
+    border: 1px solid hsl(var(--input-border));
+  }
+
+  .input-glass:focus {
+    @apply ring-2 ring-primary;
+    box-shadow: var(--shadow-glow);
+  }
+
+  /* Navigation Glass */
+  .nav-glass {
+    @apply glass-subtle backdrop-blur-xl;
+    border-bottom: 1px solid hsl(var(--border-glass));
+  }
+
+  /* Feature Card Glass */
+  .feature-card {
+    @apply glass-card p-8 hover:scale-105;
+    transition: var(--transition-glass);
+  }
+
+  .feature-card:hover {
+    box-shadow: var(--shadow-glow);
+  }
+}
+
+/* Monaco Editor Theme Support */
+.monaco-editor {
+  @apply rounded-2xl overflow-hidden;
+}
+
+.monaco-editor .margin {
+  background: transparent !important;
 }
