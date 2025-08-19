@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
+import { SettingsDropdown } from './SettingsDropdown';
 import { 
   Code2, 
   Github, 
@@ -10,7 +11,6 @@ import {
   X,
   User,
   History,
-  Settings,
   Users,
   BookOpen,
   Home
@@ -30,7 +30,6 @@ export const Navbar: React.FC<NavbarProps> = ({ isDark = false, toggleTheme }) =
     { name: 'Home', href: '/', icon: Home },
     { name: 'Dashboard', href: '/dashboard', icon: Code2 },
     { name: 'History', href: '/history', icon: History },
-    { name: 'Profile', href: '/profile', icon: User },
     { name: 'Docs', href: '/docs', icon: BookOpen },
     { name: 'Team', href: '/team', icon: Users },
   ];
@@ -118,12 +117,8 @@ export const Navbar: React.FC<NavbarProps> = ({ isDark = false, toggleTheme }) =
               </Button>
             )}
 
-            {/* Profile Settings */}
-            <Link to="/profile">
-              <Button variant="outline" size="icon" className="rounded-full">
-                <Settings className="w-4 h-4" />
-              </Button>
-            </Link>
+            {/* Settings Dropdown */}
+            <SettingsDropdown isDark={isDark} />
           </div>
 
           {/* Mobile menu button */}

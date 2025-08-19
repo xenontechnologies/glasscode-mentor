@@ -8,7 +8,7 @@ import { LandingPage } from "./pages/LandingPage";
 import { Dashboard } from "./pages/Dashboard";
 import { Login } from "./pages/Login";
 import { Register } from "./pages/Register";
-import { Profile } from "./pages/Profile";
+import { Settings } from "./pages/Settings";
 import { History } from "./pages/History";
 import { Team } from "./pages/Team";
 import { Docs } from "./pages/Docs";
@@ -28,7 +28,7 @@ const App = () => (
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
-            <Route path="/profile" element={<Profile />} />
+            <Route path="/settings/:section?" element={<Settings />} />
             <Route path="/history" element={<History />} />
             <Route path="/team" element={<Team />} />
             <Route path="/docs" element={<Docs />} />
