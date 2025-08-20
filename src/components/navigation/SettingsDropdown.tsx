@@ -22,7 +22,9 @@ interface SettingsDropdownProps {
 
 export const SettingsDropdown: React.FC<SettingsDropdownProps> = ({ isDark }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [dropdownPosition, setDropdownPosition] = useState<'bottom' | 'top'>('bottom');
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -35,6 +37,25 @@ export const SettingsDropdown: React.FC<SettingsDropdownProps> = ({ isDark }) =>
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
+
+  const handleToggleDropdown = () => {
+    if (!isOpen) {
+      // Calculate if dropdown should appear above or below
+      const buttonElement = dropdownRef.current?.querySelector('button');
+      if (buttonElement) {
+        const rect = buttonElement.getBoundingClientRect();
+        const viewportHeight = window.innerHeight;
+        const estimatedDropdownHeight = 400; // Approximate height of dropdown
+        
+        if (rect.bottom + estimatedDropdownHeight > viewportHeight) {
+          setDropdownPosition('top');
+        } else {
+          setDropdownPosition('bottom');
+        }
+      }
+    }
+    setIsOpen(!isOpen);
+  };
 
   const settingsGroups = [
     {
@@ -80,7 +101,7 @@ export const SettingsDropdown: React.FC<SettingsDropdownProps> = ({ isDark }) =>
       <Button
         variant="outline"
         size="sm"
-        onClick={() => setIsOpen(!isOpen)}
+        onClick={handleToggleDropdown}
         className="flex items-center space-x-2 rounded-full px-3"
       >
         <Settings className="w-4 h-4" />
@@ -90,8 +111,17 @@ export const SettingsDropdown: React.FC<SettingsDropdownProps> = ({ isDark }) =>
 
       {/* Dropdown Menu */}
       {isOpen && (
-        <div className="absolute right-0 mt-2 w-80 bg-background/95 backdrop-blur-xl border border-border-glass rounded-2xl shadow-elegant overflow-hidden z-50">
-          <div className="py-2">
+        <div 
+          className={`absolute right-0 w-80 sm:w-80 bg-background/95 backdrop-blur-xl border border-border-glass rounded-2xl shadow-elegant overflow-hidden z-50 max-h-[70vh] ${
+            dropdownPosition === 'top' ? 'bottom-full mb-2' : 'top-full mt-2'
+          }`}
+          onWheel={(e) => e.stopPropagation()}
+        >
+          <div 
+            ref={scrollContainerRef}
+            className="py-2 overflow-y-auto scrollbar-thin scrollbar-thumb-border-glass scrollbar-track-transparent pr-1" 
+            style={{ maxHeight: '60vh' }}
+          >
             {settingsGroups.map((group, groupIndex) => (
               <div key={group.title}>
                 {groupIndex > 0 && <div className="border-t border-border-glass my-2" />}
