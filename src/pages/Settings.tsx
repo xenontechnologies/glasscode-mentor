@@ -132,6 +132,12 @@ export const Settings: React.FC = () => {
                     <span>Notifications</span>
                   </TabsTrigger>
                 </Link>
+                <Link to="/settings/analysis">
+                  <TabsTrigger value="analysis" className="flex items-center space-x-2">
+                    <BarChart3 className="w-4 h-4" />
+                    <span>Analysis</span>
+                  </TabsTrigger>
+                </Link>
                 <Link to="/settings/billing">
                   <TabsTrigger value="billing" className="flex items-center space-x-2">
                     <CreditCard className="w-4 h-4" />
@@ -142,6 +148,18 @@ export const Settings: React.FC = () => {
                   <TabsTrigger value="security" className="flex items-center space-x-2">
                     <Shield className="w-4 h-4" />
                     <span>Security</span>
+                  </TabsTrigger>
+                </Link>
+                <Link to="/settings/export">
+                  <TabsTrigger value="export" className="flex items-center space-x-2">
+                    <Download className="w-4 h-4" />
+                    <span>Export</span>
+                  </TabsTrigger>
+                </Link>
+                <Link to="/settings/delete">
+                  <TabsTrigger value="delete" className="flex items-center space-x-2">
+                    <Trash2 className="w-4 h-4" />
+                    <span>Delete</span>
                   </TabsTrigger>
                 </Link>
               </div>
@@ -465,6 +483,128 @@ export const Settings: React.FC = () => {
                       </div>
                     </div>
                   ))}
+                </div>
+              </div>
+            </TabsContent>
+
+            {/* Analysis Tab */}
+            <TabsContent value="analysis" className="p-6">
+              <div className="space-y-6">
+                <div>
+                  <h3 className="text-lg font-semibold text-foreground mb-4">
+                    Analysis Preferences
+                  </h3>
+                  <p className="text-muted-foreground mb-6">
+                    Configure default analysis settings and custom rules for code review.
+                  </p>
+                </div>
+
+                {/* Default Analysis Settings */}
+                <div className="glass-subtle p-6 rounded-2xl">
+                  <h4 className="font-medium text-foreground mb-4">Default Analysis Settings</h4>
+                  <div className="space-y-4">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <div className="font-medium text-foreground">Code Quality Analysis</div>
+                        <div className="text-sm text-muted-foreground">
+                          Analyze code structure, complexity, and maintainability
+                        </div>
+                      </div>
+                      <Button variant="hero" size="sm">Enabled</Button>
+                    </div>
+
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <div className="font-medium text-foreground">Security Vulnerability Scan</div>
+                        <div className="text-sm text-muted-foreground">
+                          Check for common security issues and vulnerabilities
+                        </div>
+                      </div>
+                      <Button variant="hero" size="sm">Enabled</Button>
+                    </div>
+
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <div className="font-medium text-foreground">Performance Analysis</div>
+                        <div className="text-sm text-muted-foreground">
+                          Identify potential performance bottlenecks
+                        </div>
+                      </div>
+                      <Button variant="outline" size="sm">Disabled</Button>
+                    </div>
+
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <div className="font-medium text-foreground">Documentation Coverage</div>
+                        <div className="text-sm text-muted-foreground">
+                          Check for missing documentation and comments
+                        </div>
+                      </div>
+                      <Button variant="hero" size="sm">Enabled</Button>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Custom Rules */}
+                <div className="glass-subtle p-6 rounded-2xl">
+                  <div className="flex items-center justify-between mb-4">
+                    <h4 className="font-medium text-foreground">Custom Analysis Rules</h4>
+                    <Button variant="hero" size="sm">
+                      Add Rule
+                    </Button>
+                  </div>
+
+                  <div className="space-y-3">
+                    <div className="flex items-center justify-between p-3 border border-border-glass rounded-lg">
+                      <div>
+                        <div className="text-sm font-medium text-foreground">No console.log in production</div>
+                        <div className="text-xs text-muted-foreground">JavaScript/TypeScript</div>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <Button variant="outline" size="sm">Edit</Button>
+                        <Button variant="ghost" size="sm">Remove</Button>
+                      </div>
+                    </div>
+
+                    <div className="flex items-center justify-between p-3 border border-border-glass rounded-lg">
+                      <div>
+                        <div className="text-sm font-medium text-foreground">Enforce type annotations</div>
+                        <div className="text-xs text-muted-foreground">TypeScript</div>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <Button variant="outline" size="sm">Edit</Button>
+                        <Button variant="ghost" size="sm">Remove</Button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Analysis Depth */}
+                <div className="glass-subtle p-6 rounded-2xl">
+                  <h4 className="font-medium text-foreground mb-4">Analysis Depth</h4>
+                  <div className="space-y-3">
+                    <div className="flex items-center space-x-3">
+                      <input type="radio" name="depth" id="quick" className="text-primary" defaultChecked />
+                      <label htmlFor="quick" className="text-sm">
+                        <span className="font-medium text-foreground">Quick Analysis</span>
+                        <span className="text-muted-foreground"> - Basic checks and common issues</span>
+                      </label>
+                    </div>
+                    <div className="flex items-center space-x-3">
+                      <input type="radio" name="depth" id="thorough" className="text-primary" />
+                      <label htmlFor="thorough" className="text-sm">
+                        <span className="font-medium text-foreground">Thorough Analysis</span>
+                        <span className="text-muted-foreground"> - Comprehensive code review</span>
+                      </label>
+                    </div>
+                    <div className="flex items-center space-x-3">
+                      <input type="radio" name="depth" id="deep" className="text-primary" />
+                      <label htmlFor="deep" className="text-sm">
+                        <span className="font-medium text-foreground">Deep Analysis</span>
+                        <span className="text-muted-foreground"> - Advanced patterns and architecture review</span>
+                      </label>
+                    </div>
+                  </div>
                 </div>
               </div>
             </TabsContent>
