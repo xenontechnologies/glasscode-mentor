@@ -1,65 +1,146 @@
 import React, { useState } from 'react';
-import { useParams, Navigate, Link } from 'react-router-dom';
-import { Button } from '@/components/ui/button';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { useParams, useNavigate, Link } from 'react-router-dom';
 import { 
   User, 
   Key, 
-  Github, 
+  Puzzle, 
   Bell, 
-  BarChart3,
-  CreditCard,
-  Shield,
-  Download,
-  Trash2,
-  Camera,
-  Save,
+  BarChart3, 
+  CreditCard, 
+  Shield, 
+  Settings,
   Eye,
   EyeOff,
   Copy,
-  CheckCircle,
-  AlertTriangle,
-  Monitor,
+  Plus,
+  Github,
+  Slack,
+  Mail,
   Smartphone,
-  Mail
+  Monitor,
+  FileText,
+  Code,
+  Database,
+  UserX,
+  Calendar,
+  Download,
+  Trash2,
+  ChevronRight,
+  ExternalLink,
+  CheckCircle,
+  XCircle,
+  Clock,
+  AlertTriangle,
+  Save,
+  Camera
 } from 'lucide-react';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Switch } from '@/components/ui/switch';
+import { Badge } from '@/components/ui/badge';
+import { Separator } from '@/components/ui/separator';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { Progress } from '@/components/ui/progress';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { useToast } from '@/hooks/use-toast';
 import avatar1 from '@/assets/avatar-1.jpg';
 
-export const Settings: React.FC = () => {
+export const Settings = () => {
   const { section = 'profile' } = useParams();
-  
-  // Profile state
-  const [profileData, setProfileData] = useState({
-    name: 'Alex Rodriguez',
-    email: 'alex.rodriguez@example.com',
-    username: 'alexdev',
-    bio: 'Full-stack developer passionate about clean code and AI-powered development tools.',
-    website: 'https://alexdev.com',
+  const navigate = useNavigate();
+  const { toast } = useToast();
+
+  // State management
+  const [showApiKey, setShowApiKey] = useState<{ [key: string]: boolean }>({});
+  const [showKeys, setShowKeys] = useState<{ [key: string]: boolean }>({});
+  const [profile, setProfile] = useState({
+    name: 'John Doe',
+    email: 'john.doe@example.com',
+    avatar: '',
+    bio: 'Full-stack developer passionate about AI and modern web technologies.',
     location: 'San Francisco, CA',
-    plan: 'Pro',
+    website: 'https://johndoe.dev',
+    company: 'Acme Inc'
   });
 
-  // API Keys state
-  const [apiKeys, setApiKeys] = useState([
-    { id: '1', name: 'Production API', key: 'cm_live_1234567890abcdef', lastUsed: '2 hours ago', usage: 1250 },
-    { id: '2', name: 'Development API', key: 'cm_dev_abcdef1234567890', lastUsed: '1 day ago', usage: 450 },
+  const [profileData, setProfileData] = useState({
+    name: 'John Doe',
+    username: 'johndoe',
+    email: 'john.doe@example.com',
+    website: 'https://johndoe.dev',
+    bio: 'Full-stack developer passionate about AI and modern web technologies.',
+    location: 'San Francisco, CA',
+    plan: 'Pro'
+  });
+
+  const [apiKeys] = useState([
+    { id: '1', name: 'Production API Key', key: 'sk_live_...abc123', created: '2024-01-15', lastUsed: '2024-01-20', usage: 45 },
+    { id: '2', name: 'Development API Key', key: 'sk_test_...def456', created: '2024-01-10', lastUsed: '2024-01-19', usage: 12 },
   ]);
-  const [showKeys, setShowKeys] = useState<Record<string, boolean>>({});
 
-  // Notifications state
   const [notifications, setNotifications] = useState({
-    codeReviews: { email: true, push: false, desktop: true },
-    debugSessions: { email: false, push: true, desktop: false },
-    weeklyReport: { email: true, push: false, desktop: true },
-    teamActivity: { email: true, push: true, desktop: false },
-    productUpdates: { email: false, push: false, desktop: true },
+    email: {
+      projectUpdates: true,
+      securityAlerts: true,
+      marketingEmails: false,
+      weeklyDigest: true
+    },
+    push: {
+      deployments: true,
+      errors: true,
+      collaboratorUpdates: false
+    },
+    desktop: {
+      enabled: true,
+      buildCompletions: true,
+      mentions: true
+    },
+    codeReviews: {
+      email: true,
+      push: true,
+      desktop: true
+    },
+    debugSessions: {
+      email: true,
+      push: false,
+      desktop: true
+    },
+    weeklyReport: {
+      email: true,
+      push: false,
+      desktop: false
+    },
+    teamActivity: {
+      email: false,
+      push: true,
+      desktop: true
+    },
+    productUpdates: {
+      email: true,
+      push: false,
+      desktop: false
+    }
   });
+
+  const [integrations] = useState([
+    { id: 'github', name: 'GitHub', status: 'connected', icon: Github, description: 'Sync your repositories' },
+    { id: 'slack', name: 'Slack', status: 'pending', icon: Slack, description: 'Get notifications in Slack' },
+    { id: 'stripe', name: 'Stripe', status: 'disconnected', icon: CreditCard, description: 'Process payments' },
+  ]);
 
   const validSections = ['profile', 'api-keys', 'integrations', 'notifications', 'analysis', 'billing', 'security', 'export', 'delete'];
-  
+
   if (!validSections.includes(section)) {
-    return <Navigate to="/settings/profile" replace />;
+    navigate('/settings/profile');
+    return null;
   }
+
+  const toggleApiKeyVisibility = (keyId: string) => {
+    setShowApiKey(prev => ({ ...prev, [keyId]: !prev[keyId] }));
+  };
 
   const toggleKeyVisibility = (keyId: string) => {
     setShowKeys(prev => ({ ...prev, [keyId]: !prev[keyId] }));
@@ -71,20 +152,40 @@ export const Settings: React.FC = () => {
     return visible + masked;
   };
 
-  const copyToClipboard = async (text: string) => {
-    await navigator.clipboard.writeText(text);
-    // Show toast notification
+  const copyToClipboard = (text: string) => {
+    navigator.clipboard.writeText(text);
+    toast({ title: "Copied to clipboard", description: "API key copied successfully" });
   };
 
   const handleSaveProfile = () => {
-    console.log('Profile saved');
+    toast({ title: "Profile saved", description: "Your profile has been updated successfully" });
   };
 
-  const handleNotificationChange = (category: string, type: string, value: boolean) => {
+  const handleNotificationChange = (category: string, setting: string, value: boolean) => {
     setNotifications(prev => ({
       ...prev,
-      [category]: { ...prev[category as keyof typeof prev], [type]: value }
+      [category]: {
+        ...prev[category as keyof typeof prev],
+        [setting]: value
+      }
     }));
+    toast({ 
+      title: "Settings updated", 
+      description: "Your notification preferences have been saved" 
+    });
+  };
+
+  const getStatusBadge = (status: string) => {
+    switch (status) {
+      case 'connected':
+        return <Badge variant="outline" className="bg-emerald-50 text-emerald-700 border-emerald-200"><CheckCircle className="w-3 h-3 mr-1" />Connected</Badge>;
+      case 'pending':
+        return <Badge variant="outline" className="bg-yellow-50 text-yellow-700 border-yellow-200"><Clock className="w-3 h-3 mr-1" />Pending</Badge>;
+      case 'disconnected':
+        return <Badge variant="outline" className="bg-red-50 text-red-700 border-red-200"><XCircle className="w-3 h-3 mr-1" />Disconnected</Badge>;
+      default:
+        return null;
+    }
   };
 
   return (
