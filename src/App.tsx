@@ -8,7 +8,18 @@ import { LandingPage } from "./pages/LandingPage";
 import { Dashboard } from "./pages/Dashboard";
 import { Login } from "./pages/Login";
 import { Register } from "./pages/Register";
-import { Settings } from "./pages/Settings";
+import { Settings } from "./pages/SettingsMain";
+import {
+  ProfileSettings,
+  ApiKeysSettings,
+  IntegrationsSettings,
+  NotificationsSettings,
+  AnalysisSettings,
+  BillingSettings,
+  SecuritySettings,
+  ExportSettings,
+  DeleteSettings
+} from "./pages/settings";
 import { History } from "./pages/History";
 import { Team } from "./pages/Team";
 import { Docs } from "./pages/Docs";
@@ -28,7 +39,16 @@ const App = () => (
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
-            <Route path="/settings/:section?" element={<Settings />} />
+            <Route path="/settings" element={<Settings />} />
+            <Route path="/settings/profile" element={<ProfileSettings />} />
+            <Route path="/settings/api-keys" element={<ApiKeysSettings />} />
+            <Route path="/settings/integrations" element={<IntegrationsSettings />} />
+            <Route path="/settings/notifications" element={<NotificationsSettings />} />
+            <Route path="/settings/analysis" element={<AnalysisSettings />} />
+            <Route path="/settings/billing" element={<BillingSettings />} />
+            <Route path="/settings/security" element={<SecuritySettings />} />
+            <Route path="/settings/export" element={<ExportSettings />} />
+            <Route path="/settings/delete" element={<DeleteSettings />} />
             <Route path="/history" element={<History />} />
             <Route path="/team" element={<Team />} />
             <Route path="/docs" element={<Docs />} />
